@@ -76,12 +76,12 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('status')
                     ->label('Статус')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        OrderStatus::NEW->value => 'warning',
-                        OrderStatus::IN_PROGRESS->value => 'info',
-                        OrderStatus::READY->value => 'success',
-                        OrderStatus::COMPLETED->value => 'gray',
-                        OrderStatus::CANCELLED->value => 'danger',
+                    ->color(fn (OrderStatus $state): string => match ($state) {
+                        OrderStatus::NEW => 'warning',
+                        OrderStatus::IN_PROGRESS => 'info',
+                        OrderStatus::READY => 'success',
+                        OrderStatus::COMPLETED => 'gray',
+                        OrderStatus::CANCELLED => 'danger',
                     }),
                 Tables\Columns\TextColumn::make('total_price')
                     ->label('Общая стоимость')
