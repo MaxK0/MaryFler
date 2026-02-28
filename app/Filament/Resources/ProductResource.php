@@ -43,7 +43,6 @@ class ProductResource extends Resource
                 Forms\Components\Textarea::make('description')
                     ->label('Описание')
                     ->maxLength(65535)
-
                     ->columnSpanFull(),
                 Forms\Components\Select::make('category_id')
                     ->label('Категория')

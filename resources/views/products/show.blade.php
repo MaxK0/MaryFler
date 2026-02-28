@@ -34,7 +34,7 @@
                                          data-variation-id="{{ $variation->id }}"
                                          data-price="{{ $variation->price }}"
                                          data-stock="{{ $variation->stock }}"
-                                         data-descriptio="{!! $variation->description !!}">
+                                         data-description="{!! $variation->description !!}">
                                         {{ $variation->name ?: 'Вариант ' . ($index + 1) }}
                                     </div>
                                 @endforeach
@@ -73,7 +73,7 @@
 
                     <div class="product__description">
                         <h3>Описание</h3>
-                        <p>{!! $product->description !!}</p>
+                        <div>{!! nl2br(e($product->description)) !!}</div>
                     </div>
                 </div>
             </div>
