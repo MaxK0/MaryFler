@@ -3,7 +3,7 @@
 @section('content')
     <section class="products__section">
         <div class="container products__container">
-            <h1>Каталог товаров</h1>
+            <h1>Мэри Флёр</h1>
 
             <div class="products__filters">
                 <form action="{{ route('home') }}" method="GET" class="filters-form">
