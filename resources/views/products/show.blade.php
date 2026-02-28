@@ -34,7 +34,7 @@
                                          data-variation-id="{{ $variation->id }}"
                                          data-price="{{ $variation->price }}"
                                          data-stock="{{ $variation->stock }}"
-                                         data-descriptio="{{ $variation->description }}"n>
+                                         data-descriptio="{!! $variation->description !!}">
                                         {{ $variation->name ?: 'Вариант ' . ($index + 1) }}
                                     </div>
                                 @endforeach
