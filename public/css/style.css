@@ -1337,28 +1337,6 @@ a:hover {
         width: 90%;
     }
 
-    .header__nav > .fa-bars {
-        display: block;
-        font-size: 2rem;
-        cursor: pointer;
-    }
-
-    .header__ul {
-        position: fixed;
-        top: 6rem;
-        left: 0;
-        width: 100%;
-        background-color: var(--color-additional);
-        flex-direction: column;
-        padding: 2rem;
-        transform: translateY(-150%);
-        transition: transform 0.3s ease;
-    }
-
-    .header__ul.active {
-        transform: translateY(0);
-    }
-
     .cart-item {
         grid-template-columns: 80px 1fr auto;
         gap: 1rem;
@@ -1381,5 +1359,33 @@ a:hover {
     .order-footer {
         flex-direction: column;
         gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+    }
+
+    .header__nav > .fa-bars {
+        display: block;
+        font-size: 2rem;
+        cursor: pointer;
+    }
+
+    .header__ul {
+        position: fixed;
+        top: 6rem;
+        left: 0;
+        width: 100%;
+        background-color: var(--color-additional);
+        flex-direction: column;
+        padding: 2rem;
+        transform: translateY(-150%);
+        transition: transform 0.3s ease;
+    }
+
+    .header__ul.active {
+        transform: translateY(0);
     }
 }
