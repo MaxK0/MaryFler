@@ -12,8 +12,11 @@ class CreateProduct extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        // Сохраняем slug без ID
-        $productId = Product::latest()->first()->id + 1;
+        if ($product = Product::latest()->first()) {
+            $productId = $product->id + 1;
+        } else {
+            $productId = 1;
+        }
 
         $data['slug'] = $data['slug'] . '-' . $productId;
 

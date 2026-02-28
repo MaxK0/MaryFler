@@ -12,8 +12,11 @@ class CreateCategory extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        // Сохраняем slug без ID
-        $categoryId = Category::latest()->first()->id + 1;
+        if ($category = Category::latest()->first()) {
+            $categoryId = $category->id + 1;
+        } else {
+            $categoryId = 1;
+        }
 
         $data['slug'] = $data['slug'] . '-' . $categoryId;
 
