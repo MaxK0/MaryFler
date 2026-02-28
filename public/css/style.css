@@ -260,13 +260,12 @@ a:hover {
     gap: 2rem;
 }
 
-.footer__social__block i {
+.footer__social i {
     font-size: 3rem;
-    margin-bottom: 2rem;
     transition: all 0.3s ease;
 }
 
-.footer__social__block i:hover {
+.footer__social i:hover {
     transform: scale(1.05);
 }
 
@@ -499,6 +498,7 @@ a:hover {
     font-size: var(--font-size-normal);
     margin-bottom: 1rem;
     color: var(--color-acent-1);
+    height: 7.7rem;
 }
 
 .products-card__price__summary {
