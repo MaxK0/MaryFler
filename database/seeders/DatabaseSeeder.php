@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Создаем пользователей
-        User::factory(10)->create();
+//        User::factory(10)->create();
 
         // Создаем администратора
         User::factory()->create([
@@ -29,19 +29,19 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Создаем категории
-        Category::factory(5)->create();
-
-        // Создаем товары с вариациями
-        Product::factory(20)
-            ->has(ProductVariation::factory()->count(fake()->numberBetween(1, 3)), 'variations')
-            ->create();
-
-        // Создаем отзывы
-        Review::factory(50)->create();
-
-        // Создаем заказы с элементами
-        Order::factory(15)
-            ->hasItems(fake()->numberBetween(1, 5))
-            ->create();
+//        Category::factory(5)->create();
+//
+//        // Создаем товары с вариациями
+//        Product::factory(20)
+//            ->has(ProductVariation::factory()->count(fake()->numberBetween(1, 3)), 'variations')
+//            ->create();
+//
+//        // Создаем отзывы
+//        Review::factory(50)->create();
+//
+//        // Создаем заказы с элементами
+//        Order::factory(15)
+//            ->hasItems(fake()->numberBetween(1, 5))
+//            ->create();
     }
 }
