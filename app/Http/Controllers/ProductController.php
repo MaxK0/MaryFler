@@ -16,8 +16,12 @@ class ProductController extends Controller
                 $q->where('is_active', true);
             });
 
+        $selectedCategory = null;
+
         // Фильтрация по категории
         if ($request->has('category') && $request->category) {
+            $selectedCategory = Category::findOrFail($request->category);
+
             $query->where('category_id', $request->category);
         }
 
@@ -58,7 +62,7 @@ class ProductController extends Controller
         $products = $query->paginate(12);
         $categories = Category::where('is_active', true)->get();
 
-        return view('products.index', compact('products', 'categories'));
+        return view('products.index', compact('products', 'categories', 'selectedCategory'));
     }
 
     public function show($slug)

@@ -13,9 +13,18 @@ class CartController extends Controller
         $cart = Session::get('cart', []);
         $totalPrice = 0;
 
-        foreach ($cart as $item) {
+        foreach ($cart as $variationId => $item) {
             $totalPrice += $item['price'] * $item['quantity'];
+
+            // Получаем информацию о наличии товара
+            $variation = ProductVariation::find($variationId);
+            if ($variation) {
+                $cart[$variationId]['stock'] = $variation->stock;
+            }
         }
+
+        // Обновляем корзину в сессии с информацией о наличии
+        Session::put('cart', $cart);
 
         return view('cart.index', compact('cart', 'totalPrice'));
     }
@@ -43,6 +52,7 @@ class CartController extends Controller
                 'price' => $variation->price,
                 'quantity' => $quantity,
                 'image' => $variation->images[0] ?? null,
+                'stock' => $variation->stock, // Добавляем информацию о наличии
             ];
         }
 
@@ -92,9 +102,32 @@ class CartController extends Controller
     {
         $cart = Session::get('cart', []);
 
+        foreach ($request->input('quantities', []) as $variationId => $quantity) {
+            if (isset($cart[$variationId])) {
+                $variation = ProductVariation::findOrFail($variationId);
+
+                if ($variation->stock < $quantity) {
+                    return back()->with('error', 'Недостаточно товара на складе');
+                }
+
+                if ($quantity <= 0) {
+                    unset($cart[$variationId]);
+                } else {
+                    $cart[$variationId]['quantity'] = $quantity;
+                }
+            }
+        }
+
+        Session::put('cart', $cart);
+
         if (empty($cart)) {
             return redirect()->route('products.index')->with('error', 'Корзина пуста');
         }
+
+        // Валидация выбранного времени получения
+        $request->validate([
+            'pickup_date' => 'required|date|after:now',
+        ]);
 
         $totalPrice = 0;
         foreach ($cart as $item) {
@@ -103,6 +136,20 @@ class CartController extends Controller
 
         $user = auth()->user();
 
+        $pickupDate = \Carbon\Carbon::parse($request->input('pickup_date'));
+
+        // Проверяем, что выбранное время в рабочие часы (10:00 - 21:00)
+        $pickupTime = $pickupDate->format('H:i');
+        if ($pickupTime < '10:00' || $pickupTime > '21:00') {
+            return back()->with('error', 'Время получения заказа должно быть с 10:00 до 21:00');
+        }
+
+        // Проверяем, что выбранное время не раньше текущего времени + 1 час
+        $minPickupDate = now()->addHour();
+        if ($pickupDate->lt($minPickupDate)) {
+            return back()->with('error', 'Минимальное время получения заказа - через 1 час');
+        }
+
         $order = $user->orders()->create([
             'status' => 'Новое',
             'total_price' => $totalPrice,
@@ -110,6 +157,7 @@ class CartController extends Controller
             'delivery_address' => $request->input('delivery_type') === 'delivery'
                 ? $request->input('delivery_address', $user->address)
                 : null,
+            'pickup_date' => $pickupDate,
         ]);
 
         foreach ($cart as $variationId => $item) {

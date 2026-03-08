@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
@@ -13,6 +14,11 @@ Route::get('/', [ProductController::class, 'index'])->name('home');
 // Товары
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{slug}', [ProductController::class, 'show'])->name('products.show');
+
+// Категории
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('categories.show');
+
 
 // Корзина
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');

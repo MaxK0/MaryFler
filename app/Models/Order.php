@@ -19,11 +19,13 @@ class Order extends Model
         'delivery_type',
         'delivery_address',
         'estimated_completion',
+        'pickup_date',
     ];
 
     protected $casts = [
         'status' => OrderStatus::class,
         'estimated_completion' => 'datetime',
+        'pickup_date' => 'datetime',
     ];
 
     public function user(): BelongsTo

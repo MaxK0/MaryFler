@@ -19,6 +19,13 @@
                         <span class="order-status {{ $order->status }}">{{ $order->status }}</span>
                     </div>
 
+                    @if($order->pickup_date)
+                        <div class="info-item">
+                            <span>Дата и время получения:</span>
+                            <span>{{ $order->pickup_date->format('d.m.Y H:i') }}</span>
+                        </div>
+                    @endif
+
                     @if($order->estimated_completion)
                         <div class="info-item">
                             <span>Ожидаемое время готовности:</span>

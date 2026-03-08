@@ -60,6 +60,9 @@ class OrderResource extends Resource
                 Forms\Components\DateTimePicker::make('estimated_completion')
                     ->label('Ожидаемое время готовности')
                     ->required(),
+                Forms\Components\DateTimePicker::make('pickup_date')
+                    ->label('Дата и время получения заказа')
+                    ->required(),
             ]);
     }
 
@@ -69,7 +72,8 @@ class OrderResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->label('ID')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Пользователь')
                     ->searchable(),
@@ -93,6 +97,10 @@ class OrderResource extends Resource
                         'delivery' => 'Доставка',
                         default => $state,
                     }),
+                Tables\Columns\TextColumn::make('pickup_date')
+                    ->label('Дата и время получения')
+                    ->dateTime('d.m.Y H:i')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('estimated_completion')
                     ->label('Ожидаемое время готовности')
                     ->dateTime()
@@ -122,6 +130,7 @@ class OrderResource extends Resource
                 ]),
             ]);
     }
+
 
     public static function getRelations(): array
     {

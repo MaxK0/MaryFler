@@ -1,4 +1,3 @@
-<!-- resources/views/layout.blade.php -->
 <!doctype html>
 <html lang="ru">
 <head>
@@ -31,6 +30,24 @@
                                 <span class="cart-count">{{ count(session('cart')) }}</span>
                             @endif
                         </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('home') }}"
+                           class="link-nav {{ request()->routeIs('home') ? 'active' : '' }}">
+                            Главная
+                        </a>
+                    </li>
+                    <li class="categories-dropdown">
+                        <div class="categories-dropdown-toggle link-nav">
+                            Категории <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="categories-dropdown-menu">
+                            @foreach(\App\Models\Category::where('is_active', true)->get() as $category)
+                                <a href="{{ route('home', ['category' => $category->id]) }}">
+                                    {{ $category->name }}
+                                </a>
+                            @endforeach
+                        </div>
                     </li>
                     <li>
                         <a href="{{ route('about') }}"
@@ -86,10 +103,10 @@
                     </div>
                 </div>
                 <div class="footer__social">
-                    <a href="https://vk.com/" class="link-nav">
+                    <a href="https://vk.ru/maryfleur_ufa" class="link-nav">
                         <i class="fa-brands fa-vk"></i>
                     </a>
-                    <a href="https://web.telegram.org/" class="link-nav">
+                    <a href="https://t.me/MaryFleurUfa" class="link-nav">
                         <i class="fa-brands fa-telegram"></i>
                     </a>
                 </div>

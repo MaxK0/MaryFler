@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
         lastScrollTop = st;
     });
 
-
     // Получаем элементы
     const burgerMenu = document.getElementById('header__menu');
     const headerUl = document.querySelector('.header__ul');
@@ -58,19 +57,35 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = '';
     });
 
-    // Закрываем меню при клике на пункт меню
+    // Закрываем меню при клике на пункт меню (кроме выпадающего меню категорий)
     const menuLinks = document.querySelectorAll('.header__ul a');
     menuLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            // Убираем классы active
-            burgerMenu.classList.remove('active');
-            headerUl.classList.remove('active');
-            overlay.classList.remove('active');
+        link.addEventListener('click', function(e) {
+            // Если это не ссылка внутри выпадающего меню категорий
+            if (!link.closest('.categories-dropdown-menu')) {
+                // Убираем классы active
+                burgerMenu.classList.remove('active');
+                headerUl.classList.remove('active');
+                overlay.classList.remove('active');
 
-            // Возвращаем прокрутку страницы
-            document.body.style.overflow = '';
+                // Возвращаем прокрутку страницы
+                document.body.style.overflow = '';
+            }
         });
     });
+
+    // Обработка выпадающего меню категорий
+    const categoriesDropdown = document.querySelector('.categories-dropdown');
+
+    if (categoriesDropdown) {
+        const toggle = categoriesDropdown.querySelector('.categories-dropdown-toggle');
+
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            categoriesDropdown.classList.toggle('active');
+        });
+    }
 
     // Закрываем меню при изменении размера окна
     window.addEventListener('resize', function() {
