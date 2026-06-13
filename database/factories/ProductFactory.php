@@ -17,12 +17,16 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->words(3, true);
+        $adjectives = ['Нежный', 'Яркий', 'Пышный', 'Романтичный', 'Осенний', 'Весенний', 'Классический', 'Экзотический', 'Страстный', 'Изящный'];
+        $nouns = ['букет', 'набор', 'композиция', 'подарок', 'сюрприз', 'цветок', 'ансамбль'];
+        $flowers = ['из роз', 'с пионами', 'из тюльпанов', 'с орхидеями', 'из хризантем', 'с лилиями', 'из ромашек', 'с гортензиями'];
+
+        $name = fake()->randomElement($adjectives) . ' ' . fake()->randomElement($nouns) . ' ' . fake()->randomElement($flowers);
 
         return [
             'name' => $name,
             'slug' => str()->slug($name),
-            'description' => fake()->paragraphs(3, true),
+            'description' => fake()->realText(300),
             'category_id' => Category::inRandomOrder()->first()->id ?? Category::factory(),
             'is_active' => true,
         ];
