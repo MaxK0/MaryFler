@@ -45,6 +45,10 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        $request->merge([
+            'phone' => User::cleanPhone($request->input('phone'))
+        ]);
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', new PhoneRule(), 'unique:users'],

@@ -9,7 +9,7 @@
                 <div class="product__gallery">
                     <div class="swiper product-gallery-swiper">
                         <div class="swiper-wrapper">
-                            @foreach($product->variations->first()->images as $image)
+                            @foreach($product->variations->first()->images ?? [] as $image)
                                 <div class="swiper-slide">
                                     <img src="{{ asset('storage/' . $image) }}" alt="{{ $product->name }}">
                                 </div>
