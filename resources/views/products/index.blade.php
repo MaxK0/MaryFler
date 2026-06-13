@@ -1,9 +1,83 @@
 @extends('layout')
 
 @section('content')
+    <style>
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .page-header h1 {
+            margin-bottom: 0;
+        }
+        .info-tooltip-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .info-icon {
+            color: #9d174d;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .info-icon:hover, .info-icon:focus {
+            color: #be185d;
+        }
+        .info-tooltip {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            right: 100%;
+            top: 50%;
+            transform: translateY(-50%) translateX(-10px);
+            background-color: #fdf2f8;
+            border: 1px solid #fbcfe8;
+            color: #9d174d;
+            padding: 12px 15px;
+            border-radius: 8px;
+            width: 280px;
+            font-size: 14px;
+            line-height: 1.4;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+            pointer-events: none;
+        }
+        .info-tooltip-container:hover .info-tooltip,
+        .info-tooltip-container:focus-within .info-tooltip {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(-50%) translateX(-15px);
+        }
+        @media (max-width: 600px) {
+            .info-tooltip {
+                top: 100%;
+                right: 0;
+                transform: translateY(10px);
+                width: 250px;
+                text-align: right;
+            }
+            .info-tooltip-container:hover .info-tooltip,
+            .info-tooltip-container:focus-within .info-tooltip {
+                transform: translateY(15px);
+            }
+        }
+    </style>
+
     <section class="products__section">
         <div class="container products__container">
-            <h1>Мэри Флёр</h1>
+            <div class="page-header">
+                <h1>Мэри Флёр</h1>
+                <div class="info-tooltip-container" tabindex="0">
+                    <i class="fa-solid fa-circle-info info-icon"></i>
+                    <div class="info-tooltip">
+                        После оформления заказа с вами свяжется наш менеджер по указанному номеру телефона для подтверждения заказа и внесения предоплаты. <strong>Предоплата составляет 50%</strong> от суммы заказа.
+                    </div>
+                </div>
+            </div>
 
             <div class="products__filters">
                 <form action="{{ route('home') }}" method="GET" class="filters-form">

@@ -973,19 +973,19 @@ a:hover {
     margin-bottom: 1.5rem;
 }
 
-.cart-item__image {
+.item-image {
     height: 100px;
     border-radius: var(--border-radius);
     overflow: hidden;
 }
 
-.cart-item__image img {
+.item-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.cart-item__info h3 {
+.item-name {
     font-size: 1.8rem;
     font-family: "Jost", sans-serif;
     font-weight: 600;
@@ -998,13 +998,13 @@ a:hover {
     margin-bottom: 0.5rem;
 }
 
-.cart-item__price {
+.item-price {
     font-size: var(--font-size-large);
     font-weight: 700;
     color: var(--color-main);
 }
 
-.cart-item__total {
+.item-total {
     font-size: var(--font-size-large);
     font-weight: 700;
     color: var(--color-acent-1);
@@ -1025,26 +1025,32 @@ a:hover {
     margin-top: 1.5rem;
 }
 
-.cart__summary {
+.cart-summary {
     background-color: white;
     padding: 2rem;
     border-radius: var(--border-radius);
     height: fit-content;
 }
 
-.cart-summary__item {
+.cart-total {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
     font-size: var(--font-size-large);
-}
-
-.total-price {
     font-weight: 700;
     color: var(--color-main);
+    border-bottom: 1px solid var(--color-bg);
+    padding-bottom: 1rem;
 }
 
-.cart__checkout {
+.cart-delivery h3,
+.cart-pickup-date h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+}
+
+.cart-actions {
     margin-top: 2rem;
 }
 
@@ -1479,18 +1485,59 @@ a:hover {
     }
 
     .cart-item {
-        grid-template-columns: 80px 1fr auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
         gap: 1rem;
-        column-gap: 4rem;
+        position: relative;
+        padding: 1.5rem;
     }
 
-    .cart-item__quantity,
-    .cart-item__total {
-        grid-column: 2;
+    .cart-summary {
+        paddin: 2rem 0;
     }
 
-    .cart-item__remove {
-        grid-column: 3;
+    .item-image {
+        width: 100%;
+        height: 200px; /* Сделаем картинку больше для мобилки */
+    }
+
+    .item-info {
+        width: 100%;
+    }
+
+    .item-name {
+        font-size: 1.6rem;
+    }
+
+    .item-quantity {
+        justify-content: center;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    .item-total {
+        width: 100%;
+        text-align: center;
+        margin-top: 0.5rem;
+        border-top: 1px solid #eee;
+        padding-top: 1rem;
+        font-size: 1.8rem;
+    }
+
+    .item-remove {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(255,255,255,0.8);
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     .order-header {

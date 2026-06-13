@@ -23,7 +23,7 @@
                 <p>Ваша корзина пуста</p>
                 <a href="{{ route('products.index') }}" class="btn-main">Перейти к каталогу</a>
             @else
-                <form action="{{ route('cart.checkout') }}" method="POST" class="cart-form" id="cart-form">
+                <form action="{{ route('cart.checkout') }}" method="POST" class="cart-form cart__content" id="cart-form">
                     @csrf
 
                     <div class="cart-items">
@@ -98,6 +98,12 @@
                                 <input type="datetime-local" id="pickup_date" name="pickup_date"
                                        class="form-control" required>
                             </div>
+                        </div>
+
+                        <div class="cart-prepayment-notice" style="background-color: #fdf2f8; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; border: 1px solid #fbcfe8;">
+                            <p style="margin: 0; font-size: 14px; color: #9d174d;">
+                                После оформления заказа с вами свяжется наш менеджер по указанному номеру телефона для подтверждения заказа и внесения предоплаты. <strong>Предоплата составляет 50%</strong> от суммы заказа.
+                            </p>
                         </div>
 
                         <div class="cart-actions">
